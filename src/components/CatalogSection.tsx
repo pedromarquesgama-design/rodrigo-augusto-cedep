@@ -478,15 +478,6 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
         <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6 mb-6 shadow-card">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#202C70] mb-1">
-                <span>Catálogo Oficial CEDEP Lubrificantes</span>
-                {activeCategory && (
-                  <>
-                    <span>•</span>
-                    <span className="text-[#D9252A]">Categoria {activeCategory.number}</span>
-                  </>
-                )}
-              </div>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#17191D]">
                 {activeCategory ? activeCategory.name : 'Todos os Produtos Automotivos'}
               </h2>

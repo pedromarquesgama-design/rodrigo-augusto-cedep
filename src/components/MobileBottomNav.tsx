@@ -5,15 +5,18 @@ import { buildGeneralInquiryWhatsAppUrl } from '../config/business';
 
 interface MobileBottomNavProps {
   onGoHome: () => void;
+  onNavigateSection: (sectionId: string) => void;
 }
 
-export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onGoHome }) => {
+export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
+  onGoHome,
+  onNavigateSection,
+}) => {
   const {
     totalUnits,
     favoriteIds,
     setIsCartOpen,
     setIsFavoritesOpen,
-    setIsMobileCategoriesOpen,
   } = useShop();
 
   return (
@@ -33,7 +36,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onGoHome }) =>
 
         <button
           type="button"
-          onClick={() => setIsMobileCategoriesOpen(true)}
+          onClick={() => onNavigateSection('catalogo-produtos')}
           className="flex flex-col items-center justify-center gap-1 text-[#17191D] hover:text-[#202C70] active:bg-[#F4F5F7] transition-colors cursor-pointer"
         >
           <Layers className="w-5 h-5" aria-hidden="true" />

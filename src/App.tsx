@@ -167,7 +167,6 @@ const StorefrontContent: React.FC = () => {
 
         {/* Homepage Commercial & Brand Sections */}
         <CommercialSections
-          onSelectCategory={handleSelectCategory}
           onSelectBrand={handleSelectBrand}
           onExploreAllCatalog={() => {
             handleResetFilters();
@@ -186,7 +185,7 @@ const StorefrontContent: React.FC = () => {
         selectedCategoryId={filters.categoryId}
         onSelectCategory={handleSelectCategory}
       />
-      <MobileBottomNav onGoHome={handleGoHome} />
+      <MobileBottomNav onGoHome={handleGoHome} onNavigateSection={handleNavigateSection} />
       <ToastNotification />
     </div>
   );

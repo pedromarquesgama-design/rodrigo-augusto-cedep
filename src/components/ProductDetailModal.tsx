@@ -3,7 +3,6 @@ import {
   X,
   ShoppingCart,
   Heart,
-  MessageCircle,
   Layers,
   Package,
   Wrench,
@@ -15,7 +14,6 @@ import {
 import { ProductVariation } from '../types/product';
 import { useShop } from '../context/ShopContext';
 import { ProductVisual } from './ProductVisual';
-import { buildSingleProductWhatsAppUrl } from '../config/business';
 import { getCustomProductImage } from '../config/productImages';
 
 export const ProductDetailModal: React.FC = () => {
@@ -64,14 +62,14 @@ export const ProductDetailModal: React.FC = () => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/65 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-1.5 sm:p-4 md:p-6 lg:p-8 bg-black/65 backdrop-blur-xs overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-product-title"
       onClick={() => setSelectedProduct(null)}
     >
       <div
-        className="relative w-full max-w-4xl bg-white rounded-2xl border border-[#E5E7EB] shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col"
+        className="relative w-full max-w-5xl bg-white rounded-2xl border border-[#E5E7EB] shadow-2xl overflow-hidden my-auto max-h-[94vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Modal Bar */}
@@ -99,7 +97,7 @@ export const ProductDetailModal: React.FC = () => {
         </div>
 
         {/* Modal Content Grid */}
-        <div className="p-5 sm:p-7 overflow-y-auto custom-scrollbar grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+        <div className="p-4 sm:p-6 lg:p-8 overflow-y-auto custom-scrollbar grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
           {/* Left Column: Product Image Stage (5 cols) */}
           <div className="md:col-span-5 flex flex-col justify-between">
             <div className="rounded-xl border border-[#E5E7EB] overflow-hidden bg-[#F4F5F7]">
@@ -228,18 +226,18 @@ export const ProductDetailModal: React.FC = () => {
             </div>
 
             {/* Quantity & Action Buttons */}
-            <div className="pt-4 border-t border-[#E5E7EB] space-y-3">
+            <div className="pt-4 border-t border-[#E5E7EB]">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 {/* Quantity Control */}
-                <div className="flex items-center justify-between sm:justify-start border border-[#E5E7EB] rounded-lg bg-[#F4F5F7] px-2 h-12 shrink-0">
-                  <span className="text-xs font-bold text-[#737780] px-2 sm:hidden">
+                <div className="flex items-center justify-between sm:justify-start border border-[#E5E7EB] rounded-xl bg-[#F4F5F7] px-3 h-13 sm:h-14 shrink-0">
+                  <span className="text-xs font-bold text-[#737780] px-1 sm:hidden">
                     Quantidade:
                   </span>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-1">
                     <button
                       type="button"
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="w-9 h-9 rounded-md hover:bg-white text-[#17191D] flex items-center justify-center transition-colors cursor-pointer"
+                      className="w-10 h-10 rounded-lg hover:bg-white text-[#17191D] flex items-center justify-center transition-colors cursor-pointer"
                       aria-label="Diminuir quantidade"
                     >
                       <Minus className="w-4 h-4" aria-hidden="true" />
@@ -253,12 +251,12 @@ export const ProductDetailModal: React.FC = () => {
                         setQuantity(Math.max(1, parseInt(e.target.value, 10) || 1))
                       }
                       aria-label="Quantidade de unidades"
-                      className="w-12 text-center bg-transparent font-mono text-sm font-extrabold text-[#17191D] focus:outline-none"
+                      className="w-12 text-center bg-transparent font-mono text-base font-extrabold text-[#17191D] focus:outline-none"
                     />
                     <button
                       type="button"
                       onClick={() => setQuantity((q) => q + 1)}
-                      className="w-9 h-9 rounded-md hover:bg-white text-[#17191D] flex items-center justify-center transition-colors cursor-pointer"
+                      className="w-10 h-10 rounded-lg hover:bg-white text-[#17191D] flex items-center justify-center transition-colors cursor-pointer"
                       aria-label="Aumentar quantidade"
                     >
                       <Plus className="w-4 h-4" aria-hidden="true" />
@@ -266,17 +264,17 @@ export const ProductDetailModal: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Primary Add to Cart CTA */}
+                {/* Primary Add to Cart CTA (Enlarged) */}
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className={`flex-1 h-12 px-6 rounded-lg font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                  className={`flex-1 h-13 sm:h-14 px-6 rounded-xl font-black text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-lg active:scale-[0.99] ${
                     addedFeedback
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-[#D9252A] hover:bg-[#B81D22] text-white shadow-md shadow-[#D9252A]/20'
+                      ? 'bg-emerald-600 text-white shadow-emerald-600/25'
+                      : 'bg-[#D9252A] hover:bg-[#B81D22] text-white shadow-[#D9252A]/25 hover:shadow-xl hover:shadow-[#D9252A]/35'
                   }`}
                 >
-                  <ShoppingCart className="w-4 h-4" aria-hidden="true" />
+                  <ShoppingCart className="w-5 h-5 shrink-0" aria-hidden="true" />
                   <span>
                     {addedFeedback
                       ? 'ADICIONADO À SOLICITAÇÃO!'
@@ -284,17 +282,6 @@ export const ProductDetailModal: React.FC = () => {
                   </span>
                 </button>
               </div>
-
-              {/* Direct Single-Product WhatsApp Inquiry */}
-              <a
-                href={buildSingleProductWhatsAppUrl(selectedProduct, activeVar, quantity)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full h-11 px-4 rounded-lg border border-emerald-600/30 bg-emerald-50/80 hover:bg-emerald-100 text-emerald-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors cursor-pointer"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-600" aria-hidden="true" />
-                <span>Consultar Apenas Este Item pelo WhatsApp</span>
-              </a>
             </div>
           </div>
         </div>

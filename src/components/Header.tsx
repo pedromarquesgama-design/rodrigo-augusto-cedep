@@ -9,8 +9,6 @@ import {
   MessageCircle,
   ShieldCheck,
   Sparkles,
-  Wrench,
-  Truck,
   Layers,
   ArrowRight,
   PhoneCall,
@@ -188,15 +186,6 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="flex items-center gap-4 shrink-0">
-            <button
-              type="button"
-              onClick={() => onNavigateSection('solucoes-oficinas')}
-              className="hidden sm:inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors cursor-pointer"
-            >
-              <Wrench className="w-3.5 h-3.5 text-[#D9252A]" aria-hidden="true" />
-              <span>Atendimento para Oficinas e Frotas</span>
-            </button>
-            <span className="hidden sm:inline-block text-white/20">|</span>
             <a
               href={buildGeneralInquiryWhatsAppUrl()}
               target="_blank"
@@ -621,15 +610,6 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               type="button"
-              onClick={() => onNavigateSection('linha-pesada')}
-              className="px-3.5 h-12 text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-colors cursor-pointer inline-flex items-center gap-1.5"
-            >
-              <Truck className="w-3.5 h-3.5 text-sky-300" aria-hidden="true" />
-              <span>Linha Pesada</span>
-            </button>
-
-            <button
-              type="button"
               onClick={() => setIsCartOpen(true)}
               className="px-3.5 h-12 text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             >
@@ -711,16 +691,6 @@ export const Header: React.FC<HeaderProps> = ({
                 className="p-3 rounded-lg bg-[#F4F5F7] text-left font-bold text-xs text-[#17191D]"
               >
                 Ofertas & Kits
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onNavigateSection('solucoes-oficinas');
-                }}
-                className="p-3 rounded-lg bg-[#F4F5F7] text-left font-bold text-xs text-[#17191D]"
-              >
-                Para Oficinas (B2B)
               </button>
               <button
                 type="button"
