@@ -1,0 +1,23 @@
+{
+  "name": "Rodrigo Augusto — CEDEP Lubrificantes",
+  "short_name": "CEDEP Lubrificantes",
+  "description": "Catálogo automotivo completo de óleos, lubrificantes, aditivos, filtros, estética automotiva e ferramentas. Desde 1962.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4F5F7",
+  "theme_color": "#202C70",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/cedep-logo-header.png",
+      "sizes": "696x318",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/cedep-logo.png",
+      "sizes": "792x783",
+      "type": "image/png"
+    }
+  ]
+}
+

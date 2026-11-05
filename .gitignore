@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+
+# Local working files (not part of the app)
+scratch/
+products-pictures/
+design-system/
+references/
+graphify-out/
+.agents/
+.vs/
+
+# Backups
+*.bak
+*.bak-*
