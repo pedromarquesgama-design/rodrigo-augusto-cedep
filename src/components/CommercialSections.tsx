@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import {
   Sparkles,
-  Award,
   TrendingUp,
   ArrowRight,
   PackageCheck,
   ShieldCheck,
 } from 'lucide-react';
-import { PRODUCTS, MAIN_BRANDS } from '../data/products';
+import { PRODUCTS } from '../data/products';
 import { ProductCard } from './ProductCard';
 
 interface CommercialSectionsProps {
-  onSelectBrand: (brand: string) => void;
+  onSelectBrand?: (brand: string) => void;
   onExploreAllCatalog: () => void;
 }
 
@@ -123,63 +122,7 @@ export const CommercialSections: React.FC<CommercialSectionsProps> = ({
       </section>
 
       {/* =====================================================================
-          3. PRINCIPAIS MARCAS
-         ===================================================================== */}
-      <section id="principais-marcas" className="bg-white py-10 sm:py-12 border-y border-[#E5E7EB]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#202C70] mb-1">
-                <Award className="w-4 h-4 text-[#D9252A]" aria-hidden="true" />
-                <span>Fabricantes Homologados</span>
-              </div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-[#17191D]">
-                Principais Marcas Trabalhadas
-              </h2>
-              <p className="text-xs sm:text-sm text-[#737780] mt-1">
-                Clique em qualquer marca para filtrar imediatamente os produtos disponíveis no catálogo.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={onExploreAllCatalog}
-              className="text-xs sm:text-sm font-bold text-[#202C70] hover:text-[#D9252A] inline-flex items-center gap-1.5 cursor-pointer self-start sm:self-auto"
-            >
-              <span>Ver todas no catálogo</span>
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 gap-3">
-            {MAIN_BRANDS.map((brand) => (
-              <button
-                key={brand.name}
-                type="button"
-                onClick={() => onSelectBrand(brand.name)}
-                className="group p-3.5 rounded-xl border border-[#E5E7EB] bg-[#F4F5F7]/60 hover:bg-white hover:border-[#202C70] hover:shadow-card transition-all text-left flex flex-col justify-between cursor-pointer"
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-sm sm:text-base font-extrabold text-[#17191D] group-hover:text-[#202C70] tracking-tight">
-                    {brand.name}
-                  </span>
-                  <span
-                    className="w-2.5 h-2.5 rounded-full shrink-0"
-                    style={{ backgroundColor: brand.accent }}
-                    aria-hidden="true"
-                  />
-                </div>
-                <span className="text-[11px] text-[#737780] mt-1.5 line-clamp-1">
-                  {brand.tagline}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================================
-          4. MAIS PROCURADOS
+          3. MAIS PROCURADOS
          ===================================================================== */}
       <section id="mais-procurados">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">

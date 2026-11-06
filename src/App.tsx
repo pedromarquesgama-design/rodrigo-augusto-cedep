@@ -13,6 +13,7 @@ import { MobileCategoryDrawer } from './components/MobileCategoryDrawer';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
+import { Case } from '@/components/ui/cases-with-infinite-scroll';
 
 const INITIAL_FILTERS: FilterState = {
   searchQuery: '',
@@ -151,6 +152,9 @@ const StorefrontContent: React.FC = () => {
           onQuickFilterViscosity={handleQuickFilterViscosity}
           onSelectCategory={(catId) => handleSelectCategory(catId)}
         />
+
+        {/* Official Brand Partners Infinite Scroll Carousel */}
+        <Case />
 
         <CategorySection
           selectedCategoryId={filters.categoryId}
