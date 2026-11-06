@@ -470,6 +470,28 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 <Search className="w-[18px] h-[18px]" aria-hidden="true" />
               </button>
+
+              {/* Mobile Cart Button (moved from bottom nav) */}
+              <button
+                type="button"
+                onClick={() => setIsCartOpen(true)}
+                className={`lg:hidden relative inline-flex items-center justify-center w-10 h-10 rounded-[10px] border transition-all cursor-pointer shrink-0 shadow-xs ${
+                  isSolid
+                    ? 'border-[#E5E7EB] bg-white text-[#D9252A] hover:bg-[#F4F5F7]'
+                    : 'border-white/20 bg-transparent text-white hover:bg-white/10 hover:border-white/40'
+                }`}
+                aria-label={`Abrir carrinho com ${totalUnits} unidades`}
+              >
+                <ShoppingCart className="w-[18px] h-[18px]" aria-hidden="true" />
+                {totalUnits > 0 && (
+                  <span
+                    aria-live="polite"
+                    className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-[#D9252A] text-white text-[10px] font-extrabold flex items-center justify-center border-2 border-white/90"
+                  >
+                    {totalUnits}
+                  </span>
+                )}
+              </button>
             </div>
           </div>
         </div>

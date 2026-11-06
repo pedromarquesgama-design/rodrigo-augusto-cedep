@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, LayoutGrid } from 'lucide-react';
 
 const HERO_VIDEOS = [
   '/videos/hero-1.mp4',
@@ -119,6 +119,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               >
                 <span className="drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">EXPLORAR PRODUTOS</span>
                 <ArrowRight className="w-5 h-5 shrink-0 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]" strokeWidth={2.5} />
+              </button>
+
+              {/* 4b. SECONDARY CTA BUTTON (Blue) - Shop by Category */}
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('categorias-grid');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="mt-2.5 w-full h-[50px] sm:h-[52px] rounded-[10px] flex items-center justify-center gap-2.5 px-6 uppercase text-[#FFFFFF] font-bold text-[14px] sm:text-[15px] tracking-[0.05em] border border-[#7C8FF0]/40 transition-all cursor-pointer hover:brightness-110 active:scale-[0.99]"
+                style={{
+                  background: 'linear-gradient(180deg, #121A4D 0%, #1E2A78 22%, #4A5FD0 46%, #2A3A96 58%, #121A4D 100%)',
+                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.45), 0 0 24px rgba(59, 79, 184, 0.35)',
+                }}
+              >
+                <span className="drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">COMPRE POR CATEGORIA</span>
+                <LayoutGrid className="w-5 h-5 shrink-0 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]" strokeWidth={2.5} />
               </button>
             </div>
           </div>

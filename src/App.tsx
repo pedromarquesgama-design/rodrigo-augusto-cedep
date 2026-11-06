@@ -10,10 +10,10 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
 import { FavoritesDrawer } from './components/FavoritesDrawer';
 import { MobileCategoryDrawer } from './components/MobileCategoryDrawer';
-import { MobileBottomNav } from './components/MobileBottomNav';
 import { ToastNotification } from './components/ToastNotification';
 import { Footer } from './components/Footer';
 import { Case } from '@/components/ui/cases-with-infinite-scroll';
+import { TestimonialsSection } from './components/TestimonialsSection';
 
 const INITIAL_FILTERS: FilterState = {
   searchQuery: '',
@@ -169,6 +169,9 @@ const StorefrontContent: React.FC = () => {
           onResetFilters={handleResetFilters}
         />
 
+        {/* Customer Testimonials Infinite Carousel */}
+        <TestimonialsSection />
+
         {/* Homepage Commercial & Brand Sections */}
         <CommercialSections
           onSelectBrand={handleSelectBrand}
@@ -189,7 +192,6 @@ const StorefrontContent: React.FC = () => {
         selectedCategoryId={filters.categoryId}
         onSelectCategory={handleSelectCategory}
       />
-      <MobileBottomNav onGoHome={handleGoHome} onNavigateSection={handleNavigateSection} />
       <ToastNotification />
     </div>
   );

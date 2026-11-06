@@ -56,10 +56,10 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Hero section height: fits between top of screen and bottom nav bar on mobile with min-height */
+/* Hero section height: fills the entire viewport */
 .hero-mobile-height {
-  min-height: calc(100vh - 4rem);
-  min-height: calc(100dvh - 4rem - env(safe-area-inset-bottom, 0px));
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 @media (min-width: 1024px) {

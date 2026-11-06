@@ -11,7 +11,7 @@ export const ToastNotification: React.FC = () => {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 z-50 max-w-sm w-[calc(100%-2rem)] bg-[#17191D] text-white rounded-xl border border-white/15 shadow-2xl p-3.5 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-4 duration-200"
+      className="fixed bottom-6 right-4 sm:right-6 z-50 max-w-sm w-[calc(100%-2rem)] bg-[#17191D] text-white rounded-xl border border-white/15 shadow-2xl p-3.5 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-4 duration-200"
     >
       <div className="flex items-start gap-2.5 min-w-0">
         {toast.type === 'favorite' ? (

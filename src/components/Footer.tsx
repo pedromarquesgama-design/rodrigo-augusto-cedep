@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
   const { setIsCartOpen } = useShop();
 
   return (
-    <footer id="rodape-contato" className="bg-[#17191D] text-white border-t border-white/10 pb-20 lg:pb-0">
+    <footer id="rodape-contato" className="bg-[#17191D] text-white border-t border-white/10">
       {/* Top Trust Strip */}
       <div className="border-b border-white/10 bg-[#202C70]/35">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
