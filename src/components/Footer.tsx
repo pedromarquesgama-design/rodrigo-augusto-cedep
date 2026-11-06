@@ -10,6 +10,7 @@ import {
   ClipboardCheck,
   Headphones,
   ArrowUpRight,
+  Sparkles,
 } from 'lucide-react';
 import { BUSINESS_CONFIG, buildGeneralInquiryWhatsAppUrl } from '../config/business';
 import { CATEGORIES } from '../data/categories';
@@ -229,13 +230,73 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
           </div>
         </div>
 
+        {/* Porto.com Development & Persuasive Lead Capture Section */}
+        <div className="mt-12 rounded-2xl bg-gradient-to-br from-[#1C2029] via-[#16181E] to-[#0D0E12] border border-white/10 p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+          {/* Ambient luminous glow accents */}
+          <div className="pointer-events-none absolute -top-20 -right-20 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5 max-w-2xl">
+              <a
+                href="https://www.portocom.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-14 sm:h-16 px-3 py-2 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 hover:border-sky-500/40 hover:bg-white/10 transition-all cursor-pointer"
+                title="Conheça a PORTOCOM"
+              >
+                <img
+                  src="/images/logo-portocom.png"
+                  alt="PORTOCOM | Design & Engenharia Digital"
+                  className="h-10 sm:h-12 w-auto object-contain mix-blend-screen"
+                  loading="lazy"
+                />
+              </a>
+
+              <div className="space-y-1.5">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[11px] font-bold tracking-wide uppercase">
+                  <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>Design & Engenharia Digital</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-extrabold text-white tracking-tight">
+                  Gostou da velocidade e da experiência deste site?
+                </h4>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Este catálogo digital foi projetado e desenvolvido sob medida pela <a href="https://www.portocom.net/" target="_blank" rel="noopener noreferrer" className="text-white font-semibold underline decoration-sky-400 hover:text-sky-300 transition-colors">PORTOCOM</a>. Criamos sites rápidos, catálogos interativos e plataformas de alto padrão para marcas que querem liderar o mercado e transformar visitantes em clientes.
+                </p>
+              </div>
+            </div>
+
+            <div className="shrink-0 w-full sm:w-auto">
+              <a
+                href="https://www.portocom.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+              >
+                <span>Fazer Orçamento Comigo</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Bottom Copyright Bar */}
-        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>
             © {new Date().getFullYear()} <strong className="text-white">{BUSINESS_CONFIG.commercialName}</strong> ({BUSINESS_CONFIG.historicalTagline}). Todos os direitos reservados.
           </p>
-          <p className="text-center sm:text-right">
-            Catálogo Digital & Sistema de Solicitação de Disponibilidade e Orçamento via WhatsApp.
+          <p className="flex items-center gap-1.5 text-center sm:text-right">
+            <span>Desenvolvido com excelência por</span>
+            <a
+              href="https://www.portocom.net/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-white hover:text-sky-400 transition-colors inline-flex items-center gap-1 underline underline-offset-4 decoration-white/30 hover:decoration-sky-400"
+            >
+              PORTOCOM
+              <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
+            </a>
           </p>
         </div>
       </div>
