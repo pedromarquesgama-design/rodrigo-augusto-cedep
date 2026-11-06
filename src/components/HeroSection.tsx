@@ -69,7 +69,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-[64px] sm:pt-20 lg:pt-24 pb-7 sm:pb-10 lg:pb-14 flex-1 flex flex-col justify-center">
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-[52px] sm:pt-14 lg:pt-24 pb-7 sm:pb-10 lg:pb-16 flex-1 flex flex-col justify-between lg:justify-center">
+        {/* Main Content Column */}
         <div className="max-w-[540px] lg:max-w-[580px] space-y-2.5 sm:space-y-3.5 text-left flex flex-col items-start w-full">
           {/* CEDEP Official Logo - Solid authentic colors without white ghosting/neon halo */}
           <div className="w-full flex items-center justify-start pb-0.5">
@@ -137,9 +138,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </button>
           </div>
 
-          {/* 5. WHATSAPP INFO - Directly below the CTA buttons as requested */}
-          <div className="w-full max-w-[440px] pt-2 sm:pt-3">
-            {/* Top Row: Circular WhatsApp Outline Icon + Bold Title */}
+          {/* 5a. WHATSAPP INFO (Notebook/Desktop: positioned directly below the CTA buttons) */}
+          <div className="hidden lg:block w-full max-w-[440px] pt-3">
             <div className="flex items-center gap-2.5 mb-1.5">
               <svg
                 viewBox="0 0 24 24"
@@ -166,8 +166,42 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </h3>
             </div>
 
-            {/* Full Width Bottom Text */}
             <p className="text-[11px] sm:text-[12px] font-normal text-[#E2E8F0] uppercase tracking-wide leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
+              VAMOS ENCAMINHAR OS VALORES E A DISPONIBILIDADE DIRETO NO SEU WHATSAPP!
+            </p>
+          </div>
+        </div>
+
+        {/* 5b. WHATSAPP INFO (Mobile: pinned at bottom of viewport with mt-auto, preserving previous mobile layout) */}
+        <div className="lg:hidden w-full mt-auto pt-6 pb-2 sm:pb-3">
+          <div className="text-left max-w-md mx-auto py-1">
+            <div className="flex items-center gap-3 mb-2">
+              <svg
+                viewBox="0 0 24 24"
+                className="w-8 h-8 text-white shrink-0"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                <g transform="translate(12.2, 11.2) scale(0.70) translate(-12.4, -12.7)">
+                  <path
+                    d="M16.5 14.5c-.2-.1-1.3-.6-1.5-.7-.2-.1-.4-.1-.5.1-.2.2-.6.7-.8.9-.1.2-.3.2-.5.1-.2-.1-.9-.3-1.8-1.1-.7-.6-1.1-1.3-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.3.3-.4.1-.1.1-.2.2-.3.1-.1 0-.3 0-.4s-.5-1.2-.7-1.6c-.2-.4-.4-.3-.5-.3h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 2 0 1.2.9 2.4 1 2.5.1.2 1.7 2.6 4.2 3.7.6.3 1.1.4 1.4.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </g>
+              </svg>
+              <h3 className="text-[13px] sm:text-[14px] font-bold text-white uppercase tracking-wide leading-tight">
+                ADICIONE OS PRODUTOS AO<br />
+                CARRINHO E ENVIE SEU PEDIDO
+              </h3>
+            </div>
+
+            <p className="text-[11.5px] sm:text-[12.5px] font-normal text-[#E2E8F0] uppercase tracking-wide leading-relaxed">
               VAMOS ENCAMINHAR OS VALORES E A DISPONIBILIDADE DIRETO NO SEU WHATSAPP!
             </p>
           </div>
