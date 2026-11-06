@@ -5,11 +5,8 @@ import {
   Heart,
   Menu,
   X,
-  ChevronDown,
   MessageCircle,
   ShieldCheck,
-  Sparkles,
-  Layers,
   ArrowRight,
   PhoneCall,
 } from 'lucide-react';
@@ -52,7 +49,6 @@ export const Header: React.FC<HeaderProps> = ({
 
   const [localSearch, setLocalSearch] = useState(searchQuery);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isCatMenuOpen, setIsCatMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,7 +66,6 @@ export const Header: React.FC<HeaderProps> = ({
   const isSolid = isScrolled || activeView === 'catalog';
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
-  const catMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setLocalSearch(searchQuery);
@@ -80,9 +75,6 @@ export const Header: React.FC<HeaderProps> = ({
     const handleClickOutside = (e: MouseEvent) => {
       if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
         setIsSearchFocused(false);
-      }
-      if (catMenuRef.current && !catMenuRef.current.contains(e.target as Node)) {
-        setIsCatMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -148,7 +140,6 @@ export const Header: React.FC<HeaderProps> = ({
 
   const handleCategoryClick = (catId: string | null) => {
     onSelectCategory(catId);
-    setIsCatMenuOpen(false);
     setIsMobileMenuOpen(false);
     setActiveView('catalog');
     setTimeout(() => {
@@ -497,163 +488,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Desktop Navigation Bar */}
-      <nav
-        aria-label="Navegação principal"
-        className={`hidden lg:block transition-all duration-300 ${
-          isSolid
-            ? 'bg-[#202C70] text-white border-b border-[#182157]'
-            : 'bg-black/55 backdrop-blur-md text-white border-t border-b border-white/10'
-        }`}
-      >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-12">
-          <div className="flex items-center gap-1">
-            {/* All Categories Mega Dropdown Trigger */}
-            <div ref={catMenuRef} className="relative">
-              <button
-                type="button"
-                onClick={() => setIsCatMenuOpen(!isCatMenuOpen)}
-                className="inline-flex items-center gap-2.5 px-4 h-12 bg-[#D9252A] hover:bg-[#B81D22] text-white font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
-                aria-expanded={isCatMenuOpen}
-              >
-                <Layers className="w-4 h-4" aria-hidden="true" />
-                <span>Todas as 15 Categorias</span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform ${isCatMenuOpen ? 'rotate-180' : ''}`}
-                  aria-hidden="true"
-                />
-              </button>
-
-              {isCatMenuOpen && (
-                <div className="absolute left-0 top-full w-[760px] bg-white text-[#17191D] rounded-b-xl shadow-2xl border border-[#E5E7EB] p-5 z-50">
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#E5E7EB]">
-                    <div>
-                      <h3 className="text-sm font-extrabold text-[#202C70] uppercase tracking-wider">
-                        Departamentos Automotivos CEDEP
-                      </h3>
-                      <p className="text-xs text-[#737780]">
-                        Selecione uma categoria para filtrar o catálogo completo
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleCategoryClick(null)}
-                      className="text-xs font-bold text-[#D9252A] hover:underline cursor-pointer"
-                    >
-                      Ver Todo o Catálogo (85 Linhas) →
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    {CATEGORIES.map((cat) => {
-                      const isSelected = selectedCategoryId === cat.id;
-                      return (
-                        <button
-                          key={cat.id}
-                          type="button"
-                          onClick={() => handleCategoryClick(cat.id)}
-                          className={`flex items-start gap-2.5 p-2.5 rounded-lg text-left transition-all cursor-pointer ${
-                            isSelected
-                              ? 'bg-[#EEF1FA] border border-[#202C70]/30 text-[#202C70]'
-                              : 'hover:bg-[#F4F5F7] border border-transparent'
-                          }`}
-                        >
-                          <div className="w-8 h-8 rounded-md bg-[#F4F5F7] text-[#202C70] flex items-center justify-center shrink-0 mt-0.5">
-                            <CategoryIcon iconName={cat.iconName} className="w-4 h-4" />
-                          </div>
-                          <div className="min-w-0">
-                            <span className="block text-xs font-bold text-[#17191D] leading-snug">
-                              {cat.number}. {cat.name}
-                            </span>
-                            <span className="block text-[11px] text-[#737780] truncate mt-0.5">
-                              {cat.featuredSpecs.slice(0, 3).join(' · ')}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Navigation Links */}
-            <button
-              type="button"
-              onClick={() => {
-                onSelectCategory(null);
-                setActiveView('home');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className={`px-3.5 h-12 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
-                activeView === 'home' && !selectedCategoryId
-                  ? 'bg-white/15 text-white'
-                  : 'text-white/90 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Início
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleCategoryClick(null)}
-              className={`px-3.5 h-12 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
-                activeView === 'catalog'
-                  ? 'bg-white/15 text-white'
-                  : 'text-white/90 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Produtos
-            </button>
-
-            <button
-              type="button"
-              onClick={() => onNavigateSection('categorias-grid')}
-              className="px-3.5 h-12 text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-            >
-              Categorias
-            </button>
-
-            <button
-              type="button"
-              onClick={() => onNavigateSection('principais-marcas')}
-              className="px-3.5 h-12 text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-            >
-              Marcas
-            </button>
-
-            <button
-              type="button"
-              onClick={() => onNavigateSection('ofertas-oportunidades')}
-              className="px-3.5 h-12 text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-colors cursor-pointer inline-flex items-center gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
-              <span>Ofertas & Kits</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsCartOpen(true)}
-              className="px-3.5 h-12 text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-            >
-              Solicitar Orçamento
-            </button>
-
-            <button
-              type="button"
-              onClick={() => onNavigateSection('rodape-contato')}
-              className="px-3.5 h-12 text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-            >
-              Contato
-            </button>
-          </div>
-
-          <div className="text-xs text-white/80 font-medium hidden xl:flex items-center gap-2">
-            <span>Catálogo B2B & Varejo:</span>
-            <strong className="text-white font-bold">85 Famílias de Produtos · 15 Categorias</strong>
-          </div>
-        </div>
-      </nav>
-
+      {/* Desktop Navigation Bar removed as requested */}
       {/* Mobile Slide-Down Menu Drawer */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 top-[64px] z-50 bg-black/60 backdrop-blur-xs">
