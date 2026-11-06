@@ -9,14 +9,10 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/images/cedep-logo-header.png",
-      "sizes": "696x318",
-      "type": "image/png"
-    },
-    {
-      "src": "/images/cedep-logo.png",
-      "sizes": "792x783",
-      "type": "image/png"
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
