@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, LayoutGrid } from 'lucide-react';
 
-const HERO_VIDEOS = [
+const HERO_VIDEOS_MOBILE = [
   '/videos/hero-1.mp4',
   '/videos/hero-2.mp4',
   '/videos/hero-3.mp4',
+];
+
+const HERO_VIDEOS_DESKTOP = [
+  '/videos/hero-desktop-1.mp4',
+  '/videos/hero-desktop-2.mp4',
+  '/videos/hero-desktop-3.mp4',
 ];
 
 interface HeroSectionProps {
@@ -23,25 +29,42 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   // Automatically cycle through videos every 7 seconds, or on video end
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
+      setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS_DESKTOP.length);
     }, 7000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <section id="inicio" className="relative overflow-x-clip bg-[#17191D] text-white hero-mobile-height flex flex-col justify-start">
-      {/* Background Video Slider replacing the square blue/gradient lines */}
+      {/* Background Video Slider: separate sets for mobile vs notebook/desktop */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {HERO_VIDEOS.map((src, idx) => (
+        {/* Mobile Background Videos (< lg) */}
+        {HERO_VIDEOS_MOBILE.map((src, idx) => (
           <video
-            key={src}
+            key={`mobile-${src}`}
             src={src}
             autoPlay
             muted
             loop
             playsInline
-            onEnded={() => setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length)}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+            onEnded={() => setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS_MOBILE.length)}
+            className={`lg:hidden absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+              idx === currentVideoIndex ? 'opacity-75 scale-105' : 'opacity-0 scale-100'
+            }`}
+          />
+        ))}
+
+        {/* Notebook & Desktop Background Videos (>= lg) */}
+        {HERO_VIDEOS_DESKTOP.map((src, idx) => (
+          <video
+            key={`desktop-${src}`}
+            src={src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            onEnded={() => setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS_DESKTOP.length)}
+            className={`hidden lg:block absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
               idx === currentVideoIndex ? 'opacity-75 scale-105' : 'opacity-0 scale-100'
             }`}
           />
@@ -55,7 +78,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Subtle video slider indicator dots */}
         <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 pointer-events-auto">
-          {HERO_VIDEOS.map((_, idx) => (
+          {HERO_VIDEOS_DESKTOP.map((_, idx) => (
             <button
               key={idx}
               type="button"
