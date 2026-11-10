@@ -1,10 +1,7 @@
 import React from 'react';
 import {
   MessageCircle,
-  MapPin,
-  Clock,
   Phone,
-  Mail,
   ShieldCheck,
   Award,
   ClipboardCheck,
@@ -184,10 +181,10 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
             </ul>
           </div>
 
-          {/* Column 4: Contact & Business Information Placeholders (4 cols) */}
+          {/* Column 4: Contact Information (4 cols) */}
           <div className="lg:col-span-4 space-y-3">
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-sky-300">
-              Canais de Atendimento e Informações Comerciais
+              Canal de Atendimento
             </h3>
 
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3 text-xs text-slate-300">
@@ -195,34 +192,14 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory }) => {
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <span className="font-bold text-white block">WhatsApp / Telefone Comercial:</span>
-                  <span>{BUSINESS_CONFIG.whatsappDisplayPlaceholder}</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <Clock className="w-4 h-4 text-sky-300 shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <span className="font-bold text-white block">Horário de Atendimento:</span>
-                  <span>{BUSINESS_CONFIG.contactInformation.businessHoursPlaceholder}</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#D9252A] shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <span className="font-bold text-white block">Localização / Endereço:</span>
-                  <span>{BUSINESS_CONFIG.contactInformation.addressPlaceholder}</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <Mail className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <span className="font-bold text-white block">E-mail & Redes Sociais:</span>
-                  <span className="block">{BUSINESS_CONFIG.contactInformation.emailPlaceholder}</span>
-                  <span className="block text-slate-400 mt-0.5">
-                    Instagram: {BUSINESS_CONFIG.contactInformation.instagramPlaceholder}
-                  </span>
+                  <a
+                    href={buildGeneralInquiryWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-emerald-400 transition-colors"
+                  >
+                    {BUSINESS_CONFIG.whatsappDisplayPlaceholder}
+                  </a>
                 </div>
               </div>
             </div>

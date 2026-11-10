@@ -209,6 +209,7 @@ export const CartDrawer: React.FC = () => {
                     >
                       <ProductVisual
                         product={item.product}
+                        selectedVariation={item.selectedVariation}
                         selectedVariationLabel={item.selectedVariation.label}
                         size="sm"
                       />

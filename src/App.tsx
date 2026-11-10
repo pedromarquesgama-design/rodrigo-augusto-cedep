@@ -154,7 +154,7 @@ const StorefrontContent: React.FC = () => {
         />
 
         {/* Official Brand Partners Infinite Scroll Carousel */}
-        <Case />
+        <Case onSelectBrand={handleSelectBrand} />
 
         <CategorySection
           selectedCategoryId={filters.categoryId}

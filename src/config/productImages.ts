@@ -15,6 +15,8 @@
  * IMPORTANT: Do NOT assign multi-product collage images from `products-pictures/` to individual products.
  */
 
+import { PRODUCT_VARIATION_IMAGE_MAP } from './variationImages';
+
 export const PRODUCT_IMAGE_MAP: Record<string, string | undefined> = {
   // Category 01 — Óleos para Motos
   'ypf-elaion-moto-4t': '/images/products/ypf-elaion-moto-4t.png',
@@ -139,3 +141,6 @@ export function getCustomProductImage(productId: string, directImage?: string): 
   return PRODUCT_IMAGE_MAP[productId];
 }
 
+export function getVariationImage(variationId: string): string | undefined {
+  return PRODUCT_VARIATION_IMAGE_MAP[variationId];
+}

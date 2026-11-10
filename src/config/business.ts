@@ -34,15 +34,14 @@ export const BUSINESS_CONFIG: BusinessConfig = {
   commercialName: 'Rodrigo Augusto — CEDEP Lubrificantes',
   primaryBrandName: 'CEDEP Lubrificantes',
   historicalTagline: 'Desde 1982',
-  // Official placeholder following prompt rule: "Do not invent the company's WhatsApp number. Leave a clearly identified placeholder for the actual number."
-  whatsappNumber: '5500000000000',
-  whatsappDisplayPlaceholder: '(00) 00000-0000 (Número configurável)',
+  whatsappNumber: '5573991999147',
+  whatsappDisplayPlaceholder: '(73) 99199-9147',
   defaultGreeting:
     'Olá, equipe CEDEP! Tudo bem?\n\nGostaria de consultar a disponibilidade e solicitar um orçamento dos seguintes produtos:',
   defaultClosing:
     'Se possível, poderiam me informar a disponibilidade e os valores de cada item?\n\nFico no aguardo. Obrigado!',
   contactInformation: {
-    phonePlaceholder: 'Telefone / WhatsApp: A confirmar (Configurável)',
+    phonePlaceholder: 'Telefone / WhatsApp: (73) 99199-9147',
     emailPlaceholder: 'Comercial: contato@cedeplubrificantes.com.br (A confirmar)',
     addressPlaceholder: 'Endereço comercial: Consulte nossa equipe pelo WhatsApp para retirada ou entrega',
     cityStatePlaceholder: 'Atendimento Presencial e Corporativo (B2B / B2C)',

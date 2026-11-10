@@ -6,12 +6,20 @@ import { ProductVisual } from './ProductVisual';
 
 interface ProductCardProps {
   product: Product;
+  preferredVariation?: ProductVariation;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, preferredVariation }) => {
   const { addToCart, toggleFavorite, isFavorite, setSelectedProduct } = useShop();
 
-  const [selectedVar, setSelectedVar] = useState<ProductVariation>(product.variations[0]);
+  const [userVariationId, setUserVariationId] = useState<string | null>(null);
+  // search results preselect the variation being searched; user clicks override it
+  const selectedVar =
+    product.variations.find((v) => v.id === userVariationId) ||
+    preferredVariation ||
+    product.variations[0];
+
+  const selectVar = (v: ProductVariation) => setUserVariationId(v.id);
   const [justAdded, setJustAdded] = useState(false);
 
   const fav = isFavorite(product.id);
@@ -62,6 +70,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
           <ProductVisual
             product={product}
+            selectedVariation={selectedVar}
             selectedVariationLabel={selectedVar?.label}
             size="md"
           />
@@ -151,7 +160,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     <button
                       key={v.id}
                       type="button"
-                      onClick={() => setSelectedVar(v)}
+                      onClick={() => selectVar(v)}
                       className={`px-2 py-1 rounded text-[11px] font-bold border transition-all cursor-pointer truncate max-w-full ${
                         isSel
                           ? 'bg-[#202C70] text-white border-[#202C70]'
@@ -169,7 +178,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 value={selectedVar?.id}
                 onChange={(e) => {
                   const found = product.variations.find((v) => v.id === e.target.value);
-                  if (found) setSelectedVar(found);
+                  if (found) selectVar(found);
                 }}
                 className="w-full h-9 px-2.5 rounded-lg border border-[#E5E7EB] bg-[#F4F5F7] focus:bg-white focus:border-[#202C70] text-xs font-bold text-[#17191D] focus:outline-none cursor-pointer"
               >

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Product } from '../types/product';
-import { getCustomProductImage } from '../config/productImages';
+import React, { useEffect, useState } from 'react';
+import { Product, ProductVariation } from '../types/product';
+import { getCustomProductImage, getVariationImage } from '../config/productImages';
 
 interface ProductVisualProps {
   product: Product;
   selectedVariationLabel?: string;
+  selectedVariation?: ProductVariation | null;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
@@ -12,22 +13,40 @@ interface ProductVisualProps {
 export const ProductVisual: React.FC<ProductVisualProps> = ({
   product,
   selectedVariationLabel,
+  selectedVariation,
   size = 'md',
   className = '',
 }) => {
   const [imgError, setImgError] = useState(false);
-  const customImageUrl = getCustomProductImage(product.id, product.image);
+  const variationImageUrl = selectedVariation ? getVariationImage(selectedVariation.id) : undefined;
+  const customImageUrl = variationImageUrl || getCustomProductImage(product.id, product.image);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [customImageUrl]);
+
+  const sizeClasses = {
+    sm: 'h-20 w-20 p-1.5',
+    md: 'h-48 sm:h-52 w-full p-2.5',
+    lg: 'h-72 sm:h-84 md:h-96 w-full p-4',
+  }[size];
+
+  const imgMaxDimensions = {
+    sm: { maxWidth: '80px', maxHeight: '80px' },
+    md: { maxWidth: '280px', maxHeight: '280px' },
+    lg: { maxWidth: '440px', maxHeight: '440px' },
+  }[size];
 
   if (customImageUrl && !imgError) {
     return (
-      <div className={`relative flex items-center justify-center overflow-hidden ${className}`}>
+      <div className={`relative flex items-center justify-center overflow-hidden ${sizeClasses} ${className}`}>
         <img
           src={customImageUrl}
           alt={`${product.brand} — ${product.name}`}
           loading="lazy"
           onError={() => setImgError(true)}
-          style={{ maxWidth: '220px', maxHeight: '220px' }}
-          className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+          style={imgMaxDimensions}
+          className="h-full w-full object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105 [image-rendering:-webkit-optimize-contrast]"
         />
       </div>
     );
@@ -384,12 +403,6 @@ export const ProductVisual: React.FC<ProductVisualProps> = ({
         );
     }
   };
-
-  const sizeClasses = {
-    sm: 'h-20 w-20 p-1.5',
-    md: 'h-48 w-full p-3',
-    lg: 'h-72 w-full p-6',
-  }[size];
 
   return (
     <div

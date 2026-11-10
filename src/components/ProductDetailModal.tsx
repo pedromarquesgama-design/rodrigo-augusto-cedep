@@ -14,7 +14,7 @@ import {
 import { ProductVariation } from '../types/product';
 import { useShop } from '../context/ShopContext';
 import { ProductVisual } from './ProductVisual';
-import { getCustomProductImage } from '../config/productImages';
+import { getCustomProductImage, getVariationImage } from '../config/productImages';
 
 export const ProductDetailModal: React.FC = () => {
   const {
@@ -50,8 +50,10 @@ export const ProductDetailModal: React.FC = () => {
   if (!selectedProduct) return null;
 
   const fav = isFavorite(selectedProduct.id);
-  const hasCustomPhoto = Boolean(getCustomProductImage(selectedProduct.id, selectedProduct.image));
   const activeVar = selectedVariation || selectedProduct.variations[0];
+  const hasCustomPhoto = Boolean(
+    (activeVar && getVariationImage(activeVar.id)) || getCustomProductImage(selectedProduct.id, selectedProduct.image)
+  );
 
   const handleAddToCart = () => {
     if (!activeVar) return;
@@ -103,6 +105,7 @@ export const ProductDetailModal: React.FC = () => {
             <div className="rounded-xl border border-[#E5E7EB] overflow-hidden bg-[#F4F5F7]">
               <ProductVisual
                 product={selectedProduct}
+                selectedVariation={activeVar}
                 selectedVariationLabel={activeVar?.label}
                 size="lg"
               />

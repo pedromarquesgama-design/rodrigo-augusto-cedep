@@ -16,8 +16,8 @@ import {
 } from 'lucide-react';
 import { CATEGORIES, CATEGORY_MAP } from '../data/categories';
 import { PRODUCTS } from '../data/products';
-import { FilterState } from '../types/product';
-import { extractAvailableFacets, filterAndSortProducts } from '../utils/catalogSearch';
+import { FilterState, ProductVariation } from '../types/product';
+import { extractAvailableFacets, filterAndSortProducts, normalizeCompact } from '../utils/catalogSearch';
 import { ProductCard } from './ProductCard';
 import { CategoryIcon } from './CategoryIcon';
 import { buildGeneralInquiryWhatsAppUrl } from '../config/business';
@@ -75,6 +75,24 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
     () => matchingProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE),
     [matchingProducts, startIndex]
   );
+
+  // Variação a pré-selecionar: pela faceta de variação, senão pela viscosidade buscada
+  const preferredVariations = React.useMemo(() => {
+    const map: Record<string, ProductVariation> = {};
+    const q = normalizeCompact(filters.searchQuery);
+    const varFilters = filters.variations.map(normalizeCompact);
+    for (const p of matchingProducts) {
+      let pick: ProductVariation | undefined;
+      if (varFilters.length) {
+        pick = p.variations.find((v) => varFilters.includes(normalizeCompact(v.label)));
+      }
+      if (!pick && q) {
+        pick = p.variations.find((v) => q.includes(normalizeCompact(v.label)) && normalizeCompact(v.label).length >= 4);
+      }
+      if (pick) map[p.id] = pick;
+    }
+    return map;
+  }, [matchingProducts, filters.searchQuery, filters.variations]);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -711,7 +729,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
                   {paginatedProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard key={product.id} product={product} preferredVariation={preferredVariations[product.id]} />
                   ))}
                 </div>
 
