@@ -139,6 +139,13 @@ export const PRODUCT_VARIATION_IMAGE_MAP: Record<string, string> = {
   'havoline-0w20': '/images/products/var-havoline-0w20.png',
   'havoline-5w30': '/images/products/var-havoline-5w30.png',
   'havoline-15w40': '/images/products/var-havoline-15w40.png',
+  'etaniz-radiador-linha': '/images/products/var-etaniz-radiador-linha.png',
+  'etaniz-aerossois-linha': '/images/products/var-etaniz-aerossois-linha.png',
+  'etaniz-combustivel-linha': '/images/products/var-etaniz-combustivel-linha.png',
+  'etaniz-limpa-ac-linha': '/images/products/var-etaniz-limpa-ac-linha.png',
+  'etaniz-odorizador-linha': '/images/products/var-etaniz-odorizador-linha.png',
+  'etaniz-tintas-linha': '/images/products/var-etaniz-tintas-linha.png',
+  'etaniz-graxas-linha': '/images/products/var-etaniz-graxas-linha.png',
 };
 
 export function getVariationImage(variationId: string): string | undefined {
