@@ -210,7 +210,8 @@ export const Header: React.FC<HeaderProps> = ({
               className="flex items-center gap-3 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#202C70] rounded-lg"
               aria-label="Rodrigo Augusto — CEDEP Lubrificantes — Ir para o início"
             >
-              <div className={`flex items-center transition-all duration-300 ${isSolid ? 'h-10 sm:h-12' : 'h-[62px] sm:h-14'}`}>
+              {/* At rest the logo is 62px tall = 86px header; the hero video starts right below it. */}
+              <div className={`flex items-center transition-all duration-300 ${isSolid ? 'h-10 sm:h-12' : 'h-[62px]'}`}>
                 <img
                   src="/images/cedep-logo-header.png?v=2"
                   alt="CEDEP Lubrificantes — Desde 1982"

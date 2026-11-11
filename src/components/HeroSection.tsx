@@ -49,10 +49,18 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section id="inicio" className="relative overflow-x-clip bg-[#17191D] text-white hero-mobile-height flex flex-col justify-start">
-      {/* Background Video Slider: one slide per index, each holding its mobile and notebook/desktop video */}
+      {/* Fade: solid behind the nav, then blends into the video's top edge (video starts at 86px) */}
+      <div
+        className="lg:hidden absolute inset-x-0 top-0 h-[118px] pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, #17191D 86px, transparent)' }}
+        aria-hidden="true"
+      />
+
+      {/* Background Video Slider: one slide per index, each holding its mobile and notebook/desktop video.
+          On mobile it starts below the 86px header so the ads' baked-in top line is never hidden by the logo. */}
       <div
         ref={emblaRef}
-        className="absolute inset-0 overflow-hidden"
+        className="absolute inset-x-0 bottom-0 top-[86px] overflow-hidden lg:inset-0"
         style={{ touchAction: 'pan-y pinch-zoom' }}
       >
         <div className="flex h-full">
@@ -66,7 +74,7 @@ export const HeroSection: React.FC = () => {
                 loop
                 playsInline
                 tabIndex={-1}
-                className="lg:hidden absolute inset-0 w-full h-full object-contain opacity-75"
+                className="lg:hidden absolute inset-0 w-full h-full object-contain object-top opacity-75"
               />
 
               {/* Notebook & Desktop Background Video (>= lg) */}
@@ -82,16 +90,6 @@ export const HeroSection: React.FC = () => {
             </div>
           ))}
         </div>
-
-        {/* Fade: solid behind the nav bar, then blends into the video's top edge */}
-        <div
-          className="lg:hidden absolute inset-x-0 top-0 pointer-events-none"
-          style={{
-            height: 'calc((100dvh - min(100dvh, 100vw * 16 / 9)) / 2 + 80px)',
-            background: 'linear-gradient(to bottom, #17191D calc(100% - 80px), transparent)',
-          }}
-          aria-hidden="true"
-        />
 
         {/* Subtle video slider indicator dots */}
         <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 pointer-events-auto">
@@ -109,7 +107,7 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pb-7 sm:pb-10 lg:pb-16 flex-1 flex flex-col justify-end">
+      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pb-0 lg:pb-16 flex-1 flex flex-col justify-end">
         {/* 5a. WHATSAPP INFO (Notebook/Desktop: bottom-right, clear of the CTA that follows the video line) */}
         <div className="hidden lg:block self-end max-w-[340px] xl:max-w-[380px] text-right">
           <div className="flex items-center justify-end gap-2.5 mb-1.5">
@@ -143,8 +141,8 @@ export const HeroSection: React.FC = () => {
           </p>
         </div>
 
-        {/* 5b. WHATSAPP INFO (Mobile: pinned at bottom, shadow only behind the text block) */}
-        <div className="lg:hidden -mx-4 sm:-mx-6 px-4 sm:px-6 pb-2 sm:pb-3 pt-6 bg-gradient-to-t from-[#17191D] via-[#17191D]/90 to-transparent">
+        {/* 5b. WHATSAPP INFO (Mobile: pinned at bottom, shadow from the text block down to the section edge) */}
+        <div className="lg:hidden -mx-4 sm:-mx-6 px-4 sm:px-6 pb-7 sm:pb-10 pt-6 bg-gradient-to-t from-[#17191D] via-[#17191D]/90 to-transparent">
           <div className="text-left max-w-md mx-auto py-1">
             <div className="flex items-center gap-3 mb-2">
               <svg
