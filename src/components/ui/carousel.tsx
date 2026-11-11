@@ -156,8 +156,9 @@ const CarouselContent = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { carouselRef, orientation } = useCarousel()
 
+  // pan-y keeps vertical page scroll working while a horizontal drag goes to embla
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={carouselRef} className="overflow-hidden" style={{ touchAction: "pan-y pinch-zoom" }}>
       <div
         ref={ref}
         className={cn(

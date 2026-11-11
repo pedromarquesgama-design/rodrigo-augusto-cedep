@@ -138,8 +138,7 @@ export const Header: React.FC<HeaderProps> = ({
     }, 60);
   };
 
-  const handleCategoryClick = (catId: string | null) => {
-    onSelectCategory(catId);
+  const handleCategoryClick = (catId: string | null) => {    onSelectCategory(catId);
     setIsMobileMenuOpen(false);
     setActiveView('catalog');
     setTimeout(() => {
@@ -154,7 +153,7 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 ${
         isSolid
-          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-[#E5E7EB]'
+          ? 'bg-white shadow-md border-b border-[#E5E7EB]'
           : 'bg-gradient-to-b from-black/85 via-black/45 to-transparent border-transparent pointer-events-none'
       }`}
     >
@@ -181,7 +180,7 @@ export const Header: React.FC<HeaderProps> = ({
               href={buildGeneralInquiryWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-white/80 hover:text-white font-semibold transition-colors cursor-pointer"
             >
               <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Central de Cotação WhatsApp</span>
@@ -208,16 +207,14 @@ export const Header: React.FC<HeaderProps> = ({
                 setActiveView('home');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className={`flex items-center gap-3 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#202C70] rounded-lg transition-opacity duration-300 ${
-                isSolid ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              }`}
+              className="flex items-center gap-3 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#202C70] rounded-lg"
               aria-label="Rodrigo Augusto — CEDEP Lubrificantes — Ir para o início"
             >
-              <div className="h-10 sm:h-12 lg:h-13 w-auto flex items-center">
+              <div className={`flex items-center transition-all duration-300 ${isSolid ? 'h-10 sm:h-12' : 'h-[62px] sm:h-14'}`}>
                 <img
                   src="/images/cedep-logo-header.png?v=2"
                   alt="CEDEP Lubrificantes — Desde 1982"
-                  className="h-9 sm:h-11 lg:h-12 w-auto object-contain transition-all duration-300"
+                  className="h-full w-auto object-contain"
                 />
               </div>
               <div
@@ -249,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className={`relative flex items-center w-full rounded-lg border-2 transition-all ${
                     isSolid
                       ? 'border-[#E5E7EB] bg-[#F4F5F7] text-[#17191D] focus-within:bg-white focus-within:border-[#202C70] focus-within:ring-4 focus-within:ring-[#202C70]/10'
-                      : 'border-white/25 bg-black/40 backdrop-blur-md text-white focus-within:bg-black/70 focus-within:border-white/50 focus-within:ring-4 focus-within:ring-white/10'
+                      : 'border-white/25 bg-black/40 text-white focus-within:bg-black/70 focus-within:border-white/50 focus-within:ring-4 focus-within:ring-white/10'
                   }`}
                 >
                   <Search
@@ -393,24 +390,35 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Right Action Controls */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              {/* Compre por Categoria (same action as the old hero CTA) */}
+              <button
+                type="button"
+                onClick={() => onNavigateSection('categorias-grid')}
+                aria-label="Compre por categoria"
+                className={`inline-flex items-center justify-center gap-2 shrink-0 w-10 h-10 lg:w-auto lg:h-11 px-0 lg:px-3.5 rounded-[10px] lg:rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  isSolid
+                    ? 'text-[#17191D] hover:bg-black/5'
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                <Menu className="w-[18px] h-[18px] lg:w-4 lg:h-4 shrink-0" aria-hidden="true" />
+                <span className="hidden lg:inline">Compre por Categoria</span>
+              </button>
+
               {/* Direct WhatsApp Button (Desktop) */}
               <a
                 href={buildGeneralInquiryWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`hidden lg:inline-flex items-center gap-2 px-3.5 h-11 rounded-lg border text-xs font-bold transition-all cursor-pointer ${
+                className={`hidden lg:inline-flex items-center gap-2 px-3.5 h-11 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   isSolid
-                    ? 'border-emerald-600/30 bg-emerald-50/70 hover:bg-emerald-100/80 text-emerald-900'
-                    : 'border-emerald-400/40 bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 backdrop-blur-md'
+                    ? 'text-[#17191D] hover:bg-black/5'
+                    : 'text-white hover:bg-white/10'
                 }`}
               >
-                <MessageCircle className="w-4 h-4 text-emerald-500 shrink-0" aria-hidden="true" />
+                <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                 <div className="flex flex-col text-left leading-tight">
-                  <span
-                    className={`text-[10px] font-medium ${
-                      isSolid ? 'text-emerald-700' : 'text-emerald-400'
-                    }`}
-                  >
+                  <span className="text-[10px] font-medium opacity-70">
                     Dúvida Técnica?
                   </span>
                   <span>WhatsApp</span>
@@ -421,20 +429,26 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
-                className="hidden lg:inline-flex items-center gap-2.5 px-3.5 sm:px-4 h-11 rounded-lg bg-[#D9252A] hover:bg-[#B81D22] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer"
+                className={`hidden lg:inline-flex items-center gap-2.5 px-3.5 sm:px-4 h-11 rounded-lg font-bold text-xs sm:text-sm transition-all cursor-pointer ${
+                  isSolid
+                    ? 'text-[#17191D] hover:bg-black/5'
+                    : 'text-white hover:bg-white/10'
+                }`}
                 aria-label={`Abrir carrinho de orçamento com ${totalUnits} unidades`}
               >
                 <div className="relative">
                   <ShoppingCart className="w-5 h-5" aria-hidden="true" />
                   <span
                     aria-live="polite"
-                    className="absolute -top-2 -right-2.5 min-w-[20px] h-5 px-1 rounded-full bg-[#17191D] text-white text-[11px] font-extrabold flex items-center justify-center border border-white/20"
+                    className={`absolute -top-2 -right-2.5 min-w-[20px] h-5 px-1 rounded-full text-[11px] font-extrabold flex items-center justify-center ${
+                      isSolid ? 'bg-[#17191D] text-white' : 'bg-white text-[#17191D]'
+                    }`}
                   >
                     {totalUnits}
                   </span>
                 </div>
                 <div className="flex flex-col text-left leading-none">
-                  <span className="text-[10px] font-medium text-white/85 uppercase tracking-wider">
+                  <span className="text-[10px] font-medium opacity-70 uppercase tracking-wider">
                     Orçamento
                   </span>
                   <span className="text-xs font-extrabold mt-0.5">
@@ -452,10 +466,10 @@ export const Header: React.FC<HeaderProps> = ({
                   setIsSearchModalOpen(true);
                   setTimeout(() => searchInputRef.current?.focus(), 100);
                 }}
-                className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-[10px] border transition-all cursor-pointer shrink-0 shadow-xs ${
+                className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-[10px] transition-all cursor-pointer shrink-0 ${
                   isSolid
-                    ? 'border-[#E5E7EB] bg-white text-[#17191D] hover:bg-[#F4F5F7]'
-                    : 'border-white/20 bg-transparent text-white hover:bg-white/10 hover:border-white/40'
+                    ? 'text-[#17191D] hover:bg-black/5'
+                    : 'text-white hover:bg-white/10'
                 }`}
                 aria-label="Abrir busca de produtos"
               >
@@ -466,10 +480,10 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
-                className={`lg:hidden relative inline-flex items-center justify-center w-10 h-10 rounded-[10px] border transition-all cursor-pointer shrink-0 shadow-xs ${
+                className={`lg:hidden relative inline-flex items-center justify-center w-10 h-10 rounded-[10px] transition-all cursor-pointer shrink-0 ${
                   isSolid
-                    ? 'border-[#E5E7EB] bg-white text-[#D9252A] hover:bg-[#F4F5F7]'
-                    : 'border-white/20 bg-transparent text-white hover:bg-white/10 hover:border-white/40'
+                    ? 'text-[#17191D] hover:bg-black/5'
+                    : 'text-white hover:bg-white/10'
                 }`}
                 aria-label={`Abrir carrinho com ${totalUnits} unidades`}
               >
@@ -477,7 +491,9 @@ export const Header: React.FC<HeaderProps> = ({
                 {totalUnits > 0 && (
                   <span
                     aria-live="polite"
-                    className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-[#D9252A] text-white text-[10px] font-extrabold flex items-center justify-center border-2 border-white/90"
+                    className={`absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-extrabold flex items-center justify-center ${
+                      isSolid ? 'bg-[#17191D] text-white' : 'bg-white text-[#17191D]'
+                    }`}
                   >
                     {totalUnits}
                   </span>

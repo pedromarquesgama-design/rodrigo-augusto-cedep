@@ -36,7 +36,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 
         <button
           type="button"
-          onClick={() => onNavigateSection('catalogo-produtos')}
+          onClick={() => onNavigateSection('categorias-grid')}
           className="flex flex-col items-center justify-center gap-1 text-[#17191D] hover:text-[#202C70] active:bg-[#F4F5F7] transition-colors cursor-pointer"
         >
           <Layers className="w-5 h-5" aria-hidden="true" />

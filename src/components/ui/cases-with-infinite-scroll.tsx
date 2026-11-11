@@ -27,25 +27,27 @@ interface CaseProps {
 
 function Case({ onSelectBrand }: CaseProps) {
   const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
 
+  // Auto-advance, but any swipe restarts the timer so the user keeps the position they chose.
   useEffect(() => {
-    if (!api) {
-      return;
-    }
+    if (!api) return;
 
-    const timer = setTimeout(() => {
-      if (api.selectedScrollSnap() + 1 === api.scrollSnapList().length) {
-        setCurrent(0);
-        api.scrollTo(0);
-      } else {
-        api.scrollNext();
-        setCurrent(current + 1);
-      }
-    }, 1500);
+    let timer: number;
+    const restart = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => api.scrollNext(), 2500);
+    };
 
-    return () => clearTimeout(timer);
-  }, [api, current]);
+    restart();
+    api.on('select', restart);
+    api.on('pointerDown', restart);
+
+    return () => {
+      window.clearTimeout(timer);
+      api.off('select', restart);
+      api.off('pointerDown', restart);
+    };
+  }, [api]);
 
   return (
     <div id="principais-marcas" className="w-full py-8 sm:py-10 lg:py-12 bg-white border-b border-[#E5E7EB]">
@@ -57,7 +59,7 @@ function Case({ onSelectBrand }: CaseProps) {
                 Distribuidor Autorizado & Parceiro Oficial
               </span>
               <h2 className="text-lg sm:text-2xl lg:text-3xl tracking-tight font-extrabold text-[#17191D]">
-                Trabalhamos com as Principais Marcas do Mercado
+                Trabalhamos com as Melhores Marcas
               </h2>
             </div>
             <p className="text-xs text-[#737780] hidden sm:block">

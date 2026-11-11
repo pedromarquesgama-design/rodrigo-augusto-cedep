@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MessageSquareQuote, Quote } from 'lucide-react';
 import {
-  InfiniteMovingCards,
-  type InfiniteMovingCardItem,
-} from '@/components/ui/infinite-moving-cards';
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
+import type { InfiniteMovingCardItem } from '@/components/ui/infinite-moving-cards';
 
 /**
  * ATENÇÃO: depoimentos de exemplo (placeholder).
@@ -105,6 +108,29 @@ const TestimonialCard: React.FC<{ item: InfiniteMovingCardItem }> = ({ item }) =
 );
 
 export const TestimonialsSection: React.FC = () => {
+  const [api, setApi] = useState<CarouselApi>();
+
+  // Auto-advance, but every swipe restarts the timer so the user keeps control of the position.
+  useEffect(() => {
+    if (!api) return;
+
+    let timer: number;
+    const restart = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => api.scrollNext(), 4000);
+    };
+
+    restart();
+    api.on('select', restart);
+    api.on('pointerDown', restart);
+
+    return () => {
+      window.clearTimeout(timer);
+      api.off('select', restart);
+      api.off('pointerDown', restart);
+    };
+  }, [api]);
+
   return (
     <section id="depoimentos" className="bg-white py-10 sm:py-14 border-y border-[#E5E7EB]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 text-center">
@@ -117,13 +143,17 @@ export const TestimonialsSection: React.FC = () => {
         </h2>
       </div>
 
-      <InfiniteMovingCards
-        items={TESTIMONIALS}
-        speed="slow"
-        direction="left"
-        gap={16}
-        renderItem={(item) => <TestimonialCard item={item} />}
-      />
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <Carousel setApi={setApi} opts={{ align: 'start', loop: true }}>
+          <CarouselContent>
+            {TESTIMONIALS.map((item) => (
+              <CarouselItem key={item.id} className="basis-auto">
+                <TestimonialCard item={item} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
     </section>
   );
 };

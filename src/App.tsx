@@ -147,11 +147,7 @@ const StorefrontContent: React.FC = () => {
       />
 
       <main className="flex-1">
-        <HeroSection
-          onExploreProducts={scrollToCatalog}
-          onQuickFilterViscosity={handleQuickFilterViscosity}
-          onSelectCategory={(catId) => handleSelectCategory(catId)}
-        />
+        <HeroSection />
 
         {/* Official Brand Partners Infinite Scroll Carousel */}
         <Case onSelectBrand={handleSelectBrand} />
