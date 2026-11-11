@@ -73,10 +73,11 @@ export const HeroSection: React.FC = () => {
       className="relative overflow-x-clip bg-[#17191D] text-white hero-mobile-height flex flex-col justify-start"
       style={heroMinHeight ? { minHeight: heroMinHeight } : undefined}
     >
-      {/* Fade: solid behind the nav, then blends into the video's top edge (video starts at 86px) */}
+      {/* Fade: solid behind the nav, then dissolves into the video's top edge (video starts at 86px).
+          Sits above the video (z-10) so the seam actually disappears. */}
       <div
-        className="lg:hidden absolute inset-x-0 top-0 h-[118px] pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, #17191D 86px, transparent)' }}
+        className="lg:hidden absolute inset-x-0 top-0 z-10 h-[142px] pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, #17191D 86px, rgba(23,25,29,0) 142px)' }}
         aria-hidden="true"
       />
 
@@ -131,7 +132,8 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pb-0 lg:pb-16 flex-1 flex flex-col justify-end">
+      {/* The wrapper spans the whole hero, so it must not swallow drags meant for the carousel below. */}
+      <div className="relative z-10 pointer-events-none max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pb-0 lg:pb-16 flex-1 flex flex-col justify-end">
         {/* 5a. WHATSAPP INFO (Notebook/Desktop: bottom-right, clear of the CTA that follows the video line) */}
         <div className="hidden lg:block self-end max-w-[340px] xl:max-w-[380px] text-right">
           <div className="flex items-center justify-end gap-2.5 mb-1.5">
@@ -165,8 +167,12 @@ export const HeroSection: React.FC = () => {
           </p>
         </div>
 
-        {/* 5b. WHATSAPP INFO (Mobile: pinned at bottom, shadow from the text block down to the section edge) */}
-        <div ref={blockRef} className="lg:hidden -mx-4 sm:-mx-6 px-4 sm:px-6 pb-7 sm:pb-10 pt-6 bg-gradient-to-t from-[#17191D] via-[#17191D]/90 to-transparent">
+        {/* 5b. WHATSAPP INFO (Mobile: pinned at bottom, dark backing from the text down to the section edge) */}
+        <div
+          ref={blockRef}
+          className="lg:hidden -mx-4 sm:-mx-6 px-4 sm:px-6 pb-7 sm:pb-10 pt-10"
+          style={{ background: 'linear-gradient(to top, #17191D 0%, #17191D 75%, rgba(23,25,29,0.85) 88%, rgba(23,25,29,0) 100%)' }}
+        >
           <div className="text-left max-w-md mx-auto py-1">
             <div className="flex items-center gap-3 mb-2">
               <svg
