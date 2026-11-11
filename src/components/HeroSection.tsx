@@ -22,6 +22,26 @@ export const HeroSection: React.FC = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: reduceMotion ? 0 : 32 });
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
+  // Phones whose usable height is close to the ad's 9:16 don't fit nav + ad + text block.
+  // There the hero grows so the ad is shown whole, letting the block overlap only its dark footer.
+  const blockRef = React.useRef<HTMLDivElement>(null);
+  const [heroMinHeight, setHeroMinHeight] = useState<number>();
+
+  useEffect(() => {
+    const measure = () => {
+      const block = blockRef.current;
+      const width = document.documentElement.clientWidth;
+      if (!block || width >= 640) return setHeroMinHeight(undefined);
+
+      const needed = 86 + (width * 16) / 9 + block.offsetHeight - 60;
+      setHeroMinHeight(needed > window.innerHeight ? needed : undefined);
+    };
+
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
   // Auto-advance every 7s; every slide change (auto or swipe) restarts the timer so a gesture is never cut short.
   useEffect(() => {
     if (!emblaApi) return;
@@ -48,7 +68,11 @@ export const HeroSection: React.FC = () => {
   }, [emblaApi]);
 
   return (
-    <section id="inicio" className="relative overflow-x-clip bg-[#17191D] text-white hero-mobile-height flex flex-col justify-start">
+    <section
+      id="inicio"
+      className="relative overflow-x-clip bg-[#17191D] text-white hero-mobile-height flex flex-col justify-start"
+      style={heroMinHeight ? { minHeight: heroMinHeight } : undefined}
+    >
       {/* Fade: solid behind the nav, then blends into the video's top edge (video starts at 86px) */}
       <div
         className="lg:hidden absolute inset-x-0 top-0 h-[118px] pointer-events-none"
@@ -142,7 +166,7 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* 5b. WHATSAPP INFO (Mobile: pinned at bottom, shadow from the text block down to the section edge) */}
-        <div className="lg:hidden -mx-4 sm:-mx-6 px-4 sm:px-6 pb-7 sm:pb-10 pt-6 bg-gradient-to-t from-[#17191D] via-[#17191D]/90 to-transparent">
+        <div ref={blockRef} className="lg:hidden -mx-4 sm:-mx-6 px-4 sm:px-6 pb-7 sm:pb-10 pt-6 bg-gradient-to-t from-[#17191D] via-[#17191D]/90 to-transparent">
           <div className="text-left max-w-md mx-auto py-1">
             <div className="flex items-center gap-3 mb-2">
               <svg
